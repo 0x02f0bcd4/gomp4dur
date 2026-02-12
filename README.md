@@ -20,7 +20,7 @@ I tried to, but then I got some permission issue. Also, I couldn't bother myself
 
 ## Technologia
 
-Nothing interesting to be honest, the library finds the duration by _leapfrogging_ throughout the file. It checks if the MOOV atom of the file has duration set to 0 or not, if so, it's declares it as fMP4 (fragmented MP4) and tries to read the TRAK atom to find out the video tracks. Then it searches the MOOF atoms to get the duration of each fragments.
+Nothing interesting to be honest, the library finds the duration by _leapfrogging_ throughout the file. It checks if the MOOV atom of the file has duration set to 0 or not, if so, the library identifies the video as fMP4 (fragmented MP4) and tries to read the TRAK atom to find out the video tracks. Then it searches the MOOF atoms to get the duration of each fragments.
 
 ## Test coverage
 
