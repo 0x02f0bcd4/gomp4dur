@@ -31,6 +31,19 @@ Now, I could cover only two test edges -
 
 However, as for the case where the TFHD atom's `default_sample_duration` flag is not set and to find the sample's duration I need to read the `SAMPLE_TABLE` to get the total SAMPLE duration, I couldn't find a video neither could I generate a video with the help of FFMPEG and MP4BOX to test the case. If you can find it, please let me know. Thank you.
 
+## Known limitations
+
+The following limitations are to be worked on -
+
+1. This library currently asks for at a single video track to be available in the case of fMP4. If this is not the case, the library will error out with "No video track found." This feature will be removed in future.
+2. This library currently finds duration based on the longest video track in the case of fMP4. It doesn't count sound track. So if your fMP4 has a longer sound track than the video track(s), then it may give you an errorneous duration value.
+
+The limitations will be ironed out in the next version release of this library.
+
+## Versioning
+
+This library follows the [semver](https://semver.org/) method of versioning. Click on the link to learn more about semver. Initial stable release version is 0.0.0 (I prefer to have a 0 based indexing.)
+
 
 ## Support
 
@@ -41,4 +54,3 @@ As for supporting through code, do open a PR and let me know about it. Don't bot
 ## License
 
 This library is licensed under MIT License. Read the LICENSE.txt file to know more.
-
