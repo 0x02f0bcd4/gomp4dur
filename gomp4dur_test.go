@@ -1,0 +1,68 @@
+package gomp4dur
+
+import (
+	"os"
+	"testing"
+)
+
+func Test_Get_MOOV(t *testing.T) {
+	moov_file, err := os.OpenFile("resources/big-buck-bunny.mp4", os.O_RDONLY, 0644)
+
+	if err != nil {
+		t.Errorf("%v", err)
+	}
+
+	defer moov_file.Close()
+
+	duration, err := Get(moov_file)
+
+	if err != nil {
+		t.Errorf("%v", err)
+	}
+
+	if (duration - float64(600.0)) >= 0.0000001 {
+		t.Errorf("The duration didn't match, expected: %f, found: %f", 600.0, duration)
+	}
+}
+
+func Test_Get_MOOF(t *testing.T) {
+	moof_file, err := os.OpenFile("resources/big-buck-bunny-frag.mp4", os.O_RDONLY, 0644)
+
+	if err != nil {
+		t.Errorf("%v\n", err)
+	}
+
+	defer moof_file.Close()
+
+	duration, err := Get(moof_file)
+
+	if err != nil {
+		t.Error(err)
+	}
+
+	if (duration - float64(600.0)) >= 0.0000001 {
+		t.Errorf("The duration didn't match, expected: %f, found: %f", 600.0, duration)
+	}
+}
+
+func Test_Stringify(t *testing.T) {
+	file, err := os.OpenFile("resources/big-buck-bunny.mp4", os.O_RDONLY, 0644)
+
+	if err != nil {
+		t.Error(file)
+	}
+
+	defer file.Close()
+
+	duration, err := Get(file)
+
+	if err != nil {
+		t.Error(err)
+	}
+
+	str_dur := Stringify(duration)
+
+	if str_dur != "00:10" {
+		t.Errorf("Stringification of obtained duration failed, expected - \"%s\", found: \"%s\"", "00:10", str_dur)
+	}
+}

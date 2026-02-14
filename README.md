@@ -31,6 +31,8 @@ Now, I could cover only two test edges -
 
 However, as for the case where the TFHD atom's `default_sample_duration` flag is not set and to find the sample's duration I need to read the `SAMPLE_TABLE` to get the total SAMPLE duration, I couldn't find a video neither could I generate a video with the help of FFMPEG and MP4BOX to test the case. If you can find it, please let me know. Thank you.
 
+Also note, testing can be currently run on linux and macos. Support for testing on windows is not available, and it will never be made available. If you wish to test this software on Windows, consider using Windows-Subsystem-on-Linux (WSL).
+
 ## Known limitations
 
 The following limitations are to be worked on -
