@@ -76,13 +76,15 @@ func Get(file *os.File) (duration float64, err error) {
 		var non_timescaled_duration uint64
 		var ok bool
 		for _, track := range track_info {
-			non_timescaled_duration, ok = video_duration_map[track.Track_header_info.Track_id]
-			if !ok {
-				err = fmt.Errorf("Failed to obtain the duration of one or more video tracks, file could be damaged or malformed.")
-				return
-			}
+			if track.Is_video_track {
+				non_timescaled_duration, ok = video_duration_map[track.Track_header_info.Track_id]
+				if !ok {
+					err = fmt.Errorf("Failed to obtain the duration of one or more video tracks, file could be damaged or malformed.")
+					return
+				}
 
-			video_practical_duration = append(video_practical_duration, float64(non_timescaled_duration)/float64(track.MDIA_timescale))
+				video_practical_duration = append(video_practical_duration, float64(non_timescaled_duration)/float64(track.MDIA_timescale))
+			}
 		}
 
 		//get the highest duration value

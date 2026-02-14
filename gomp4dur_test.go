@@ -1,6 +1,7 @@
 package gomp4dur
 
 import (
+	"math"
 	"os"
 	"testing"
 )
@@ -40,8 +41,8 @@ func Test_Get_MOOF(t *testing.T) {
 		t.Error(err)
 	}
 
-	if (duration - float64(600.0)) >= 0.0000001 {
-		t.Errorf("The duration didn't match, expected: %f, found: %f", 600.0, duration)
+	if math.Abs(duration-float64(10.0)) >= 0.0000001 {
+		t.Errorf("The duration didn't match, expected: %f, found: %f", 10.0, duration)
 	}
 }
 
