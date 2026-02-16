@@ -10,7 +10,7 @@ func Test_Get_MOOV(t *testing.T) {
 	moov_file, err := os.OpenFile("resources/big-buck-bunny.mp4", os.O_RDONLY, 0644)
 
 	if err != nil {
-		t.Errorf("%v", err)
+		t.Fatalf("%v", err)
 	}
 
 	defer moov_file.Close()
@@ -18,11 +18,11 @@ func Test_Get_MOOV(t *testing.T) {
 	duration, err := Get(moov_file)
 
 	if err != nil {
-		t.Errorf("%v", err)
+		t.Fatalf("%v", err)
 	}
 
 	if math.Abs(duration-float64(10.0)) >= 0.0000001 {
-		t.Errorf("The duration didn't match, expected: %f, found: %f", 600.0, duration)
+		t.Fatalf("The duration didn't match, expected: %f, found: %f", 10.0, duration)
 	}
 }
 
@@ -30,7 +30,7 @@ func Test_Get_MOOF(t *testing.T) {
 	moof_file, err := os.OpenFile("resources/big-buck-bunny-frag.mp4", os.O_RDONLY, 0644)
 
 	if err != nil {
-		t.Errorf("%v\n", err)
+		t.Fatalf("%v\n", err)
 	}
 
 	defer moof_file.Close()
@@ -38,11 +38,11 @@ func Test_Get_MOOF(t *testing.T) {
 	duration, err := Get(moof_file)
 
 	if err != nil {
-		t.Error(err)
+		t.Fatal(err)
 	}
 
 	if math.Abs(duration-float64(10.0)) >= 0.0000001 {
-		t.Errorf("The duration didn't match, expected: %f, found: %f", 10.0, duration)
+		t.Fatalf("The duration didn't match, expected: %f, found: %f", 10.0, duration)
 	}
 }
 
